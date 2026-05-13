@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>The Narrow Path — itsHER</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dk:#4d3e43;
+  --cr:#fff1e3;
+  --gd:#c4a882;
+  --dp:#2e2228;
+  --dr:#1a1215;
+  --bg:#09070a;
+  --tl:#7a6858;
+  --tm:#c4a882;
+  --tc:#e8d8c4;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cr);font-family:'Lato',sans-serif;font-weight:300;overflow-x:hidden;line-height:1.6}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.15;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E")}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(9,7,10,.96),transparent)}
+.nav-logo{display:flex;align-items:center}
+.nav-logo svg{height:24px;width:auto}
+.nav-apply{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--cr);border:1px solid rgba(196,168,130,.3);padding:9px 20px;text-decoration:none;transition:all .3s}
+.nav-apply:hover{border-color:var(--gd);color:var(--gd)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:9rem 2rem 5rem;position:relative;background:radial-gradient(ellipse 80% 55% at 50% 22%,rgba(77,62,67,.22) 0%,transparent 68%)}
+.hero-pulse{display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:2.2rem;opacity:0;animation:up .8s .1s forwards}
+.pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--gd);animation:blink 2s ease-in-out infinite}
+.hero-pulse span{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gd)}
+.hero-mark{margin-bottom:1.6rem;opacity:0;animation:up .8s .25s forwards}
+.hero-mark svg{height:58px;width:58px}
+.hero-h{font-family:'Cormorant Garamond',serif;font-size:clamp(62px,13vw,136px);font-weight:300;line-height:.88;color:var(--cr);margin-bottom:1.6rem;opacity:0;animation:up .8s .4s forwards}
+.hero-h em{font-style:italic;color:var(--gd);display:block}
+.hero-vline{width:1px;height:60px;background:linear-gradient(to bottom,var(--gd),transparent);margin:0 auto 2rem;opacity:0;animation:up .8s .55s forwards}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.6vw,23px);font-style:italic;font-weight:300;color:var(--tc);max-width:600px;line-height:1.7;margin:0 auto 3rem;opacity:0;animation:up .8s .7s forwards}
+.hero-date{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gd);margin-bottom:2.5rem;opacity:0;animation:up .8s .82s forwards}
+.price-row{display:flex;align-items:stretch;justify-content:center;gap:2px;margin-bottom:2.5rem;flex-wrap:wrap;opacity:0;animation:up .8s .95s forwards}
+.pp{padding:1.8rem 2.8rem;text-align:center;border:1px solid rgba(196,168,130,.15);min-width:190px}
+.pp.best{border-color:var(--gd);background:rgba(196,168,130,.05)}
+.pp-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--tl);margin-bottom:.4rem}
+.pp-amt{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:300;line-height:1;color:var(--cr)}
+.pp.best .pp-amt{color:var(--gd)}
+.pp-det{font-size:10px;letter-spacing:.8px;color:var(--tl);margin-top:.3rem}
+.pp-save{font-size:10px;color:var(--gd);margin-top:.3rem}
+.hero-btns{display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:up .8s 1.1s forwards}
+.btn-main{display:inline-block;background:var(--cr);color:var(--dk);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:18px 50px;border:none;cursor:pointer;transition:all .3s;text-decoration:none}
+.btn-main:hover{background:var(--gd)}
+.btn-sec{font-size:11px;color:var(--tl);letter-spacing:1px;text-decoration:none;border-bottom:1px solid rgba(122,104,88,.3);padding-bottom:2px;transition:all .3s}
+.btn-sec:hover{color:var(--gd);border-color:var(--gd)}
+.hero-caveat{font-size:11px;color:var(--tl);letter-spacing:1.2px;margin-top:.6rem;opacity:0;animation:up .8s 1.25s forwards}
+.scroll-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:up .8s 2s forwards}
+.scroll-cue span{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--tl)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gd),transparent);animation:pulse-line 2.2s ease-in-out infinite}
+
+/* ── TRUTH ── */
+.truth{background:var(--dk);padding:4rem 2rem;text-align:center;position:relative;overflow:hidden}
+.truth::before{content:'$5K';position:absolute;font-family:'Cormorant Garamond',serif;font-size:280px;font-weight:300;color:rgba(255,241,227,.025);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;line-height:1}
+.truth p{font-family:'Cormorant Garamond',serif;font-size:clamp(19px,3vw,30px);font-weight:300;color:var(--cr);max-width:800px;margin:0 auto;line-height:1.65}
+.truth p strong{color:var(--gd);font-weight:500;font-style:italic}
+
+.sec-lbl{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gd);text-align:center;margin-bottom:2rem}
+
+/* ── MIRROR ── */
+.mirror{padding:7rem 2rem}
+.mirror-in{max-width:760px;margin:0 auto}
+.eyebrow{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gd);margin-bottom:2.5rem}
+.mirror-q{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3.5vw,34px);font-weight:300;font-style:italic;color:var(--cr);line-height:1.5;border-left:1px solid var(--gd);padding-left:2rem;margin-bottom:3rem}
+.mirror-body{font-size:14px;color:var(--tm);line-height:2}
+.mirror-body p+p{margin-top:1.2rem}
+
+/* ── WHO ── */
+.who{padding:5rem 2rem;background:var(--dp)}
+.who-in{max-width:920px;margin:0 auto}
+.who-cols{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(196,168,130,.07)}
+.wc{background:var(--dp);padding:2.5rem 2rem}
+.wc-head{font-size:9px;letter-spacing:4px;text-transform:uppercase;padding-bottom:1.2rem;border-bottom:1px solid #1e1519;margin-bottom:1.6rem}
+.wc-head.y{color:var(--gd)}
+.wc-head.n{color:var(--tl)}
+.wi{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--tm);line-height:1.55;padding:11px 0;border-bottom:1px solid rgba(30,21,25,.8)}
+.wi:last-child{border-bottom:none}
+.wi.y::before{content:'— ';color:var(--gd);opacity:.5}
+.wi.n{color:var(--tl)}
+.wi.n::before{content:'✕ ';color:#3a2430}
+
+/* ── WEEKS ── */
+.weeks{padding:7rem 2rem}
+.weeks-hd{text-align:center;margin-bottom:4rem}
+.weeks-t{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:300;color:var(--cr);line-height:1.1;margin-bottom:.7rem}
+.weeks-t em{font-style:italic;color:var(--gd)}
+.weeks-s{font-size:12px;color:var(--tl);letter-spacing:1px}
+.wk-list{display:flex;flex-direction:column;gap:1px;background:rgba(196,168,130,.05);max-width:880px;margin:0 auto}
+.wk{display:grid;grid-template-columns:88px 1fr;background:var(--dr);transition:background .3s}
+.wk:hover{background:#0f0b0e}
+.wk-l{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:2.2rem 1rem;border-right:1px solid rgba(196,168,130,.05);gap:.3rem}
+.wk-nl{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--tl)}
+.wk-n{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:rgba(196,168,130,.1);line-height:1;transition:color .3s}
+.wk:hover .wk-n{color:var(--gd)}
+.wk-r{padding:2.2rem 2.5rem}
+.wk-t{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:400;color:var(--cr);margin-bottom:.5rem}
+.wk-d{font-size:12.5px;color:var(--tl);line-height:1.85;margin-bottom:.8rem}
+.wk-q{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--gd);padding-left:.9rem;border-left:1px solid rgba(196,168,130,.22)}
+.wk-sp{background:var(--dp) !important}
+.wk-sp .wk-n{color:rgba(196,168,130,.25)}
+.wk-sp:hover .wk-n{color:var(--cr)}
+
+/* ── OFFER ── */
+.offer{padding:7rem 2rem;background:var(--dp)}
+.offer-t{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,46px);font-weight:300;color:var(--cr);text-align:center;margin-bottom:.7rem}
+.offer-s{text-align:center;color:var(--tl);font-size:12px;margin-bottom:4rem;letter-spacing:.5px}
+.offer-g{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(196,168,130,.06);max-width:880px;margin:0 auto 1px}
+.oi{background:var(--dp);padding:2.2rem 2rem;transition:background .3s}
+.oi:hover{background:#2a2028}
+.o-mk{width:28px;height:1px;background:var(--gd);margin-bottom:1.3rem}
+.o-t{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cr);margin-bottom:.5rem}
+.o-b{font-size:12px;color:var(--tl);line-height:1.9}
+.offer-ft{background:var(--dk);padding:2rem 3rem;max-width:880px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.of-q{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--cr);max-width:460px;line-height:1.55}
+.of-d{font-size:11px;color:var(--tm);letter-spacing:.5px;text-align:right;line-height:2}
+
+/* ── PRICING ── */
+.pricing{padding:7rem 2rem}
+.pricing-t{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,46px);font-weight:300;color:var(--cr);text-align:center;margin-bottom:4rem}
+.p-cards{display:grid;grid-template-columns:1fr 1fr;gap:2px;max-width:780px;margin:0 auto 2.5rem;background:rgba(196,168,130,.07)}
+.pc{background:var(--dr);padding:3rem 2.5rem;text-align:center}
+.pc.feat{background:var(--dk)}
+.pc-lbl{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--tl);margin-bottom:.6rem}
+.pc.feat .pc-lbl{color:var(--gd)}
+.pc-badge{display:inline-block;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gd);border:1px solid rgba(196,168,130,.3);padding:5px 14px;margin-bottom:.9rem}
+.pc-amt{font-family:'Cormorant Garamond',serif;font-size:62px;font-weight:300;color:var(--cr);line-height:1;margin-bottom:.3rem}
+.pc.feat .pc-amt{color:var(--gd)}
+.pc-per{font-size:11px;color:var(--tl);letter-spacing:1px;margin-bottom:1.5rem}
+.pc-list{font-size:12px;color:var(--tm);line-height:2.2;margin-bottom:2rem;text-align:left}
+.pc-list li{list-style:none;padding-left:.8rem}
+.pc-list li::before{content:'— ';color:rgba(196,168,130,.35)}
+.btn-pc{display:block;width:100%;background:transparent;color:var(--cr);font-size:10px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;padding:13px 0;border:1px solid rgba(255,241,227,.14);cursor:pointer;transition:all .3s;text-decoration:none;text-align:center}
+.btn-pc:hover{border-color:var(--gd);color:var(--gd)}
+.pc.feat .btn-pc{background:var(--cr);color:var(--dk);border-color:var(--cr)}
+.pc.feat .btn-pc:hover{background:var(--gd);border-color:var(--gd)}
+.pay-now-box{max-width:780px;margin:0 auto 2.5rem;background:rgba(196,168,130,.04);border:1px solid rgba(196,168,130,.2);padding:2rem 2.5rem;text-align:center}
+.pay-now-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gd);margin-bottom:.8rem}
+.pay-now-text{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:var(--tc);line-height:1.6;margin-bottom:1.5rem}
+.btn-paynow{display:inline-block;background:var(--gd);color:var(--dk);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:16px 44px;border:none;cursor:pointer;transition:all .3s;text-decoration:none}
+.btn-paynow:hover{background:var(--cr)}
+.pricing-note{text-align:center;font-size:12px;color:var(--tl);max-width:520px;margin:0 auto;line-height:1.9}
+
+/* ── APPLICATION ── */
+.app{padding:7rem 2rem;background:var(--dp)}
+.app-t{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,62px);font-weight:300;color:var(--cr);text-align:center;line-height:1.05;margin-bottom:.9rem}
+.app-t em{font-style:italic;color:var(--gd)}
+.app-s{text-align:center;font-size:13px;color:var(--tl);max-width:500px;margin:0 auto 4.5rem;line-height:1.9}
+.form-wrap{max-width:680px;margin:0 auto}
+.fsec{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gd);padding-bottom:.7rem;border-bottom:1px solid #1e1519;margin-bottom:2.2rem;margin-top:3rem}
+.fsec:first-of-type{margin-top:0}
+.field{margin-bottom:2rem}
+.field label{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--tl);margin-bottom:.8rem}
+.req{color:var(--gd);margin-left:2px}
+.field input,.field textarea,.field select{width:100%;background:transparent;border:none;border-bottom:1px solid #1e1519;color:var(--cr);font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;padding:9px 0;outline:none;transition:border-color .3s}
+.field input::placeholder,.field textarea::placeholder{color:#2e2228}
+.field input:focus,.field textarea:focus,.field select:focus{border-bottom-color:var(--gd)}
+.field textarea{resize:none;height:86px;line-height:1.6}
+.field select{cursor:pointer;appearance:none}
+.field select option{background:#1a1215;color:var(--cr)}
+.rg{display:flex;flex-direction:column;gap:8px}
+.ro{display:flex;align-items:flex-start;gap:14px;padding:13px 16px;border:1px solid #1a1215;cursor:pointer;transition:border-color .3s}
+.ro:hover{border-color:#2e2228}
+.ro input[type=radio]{display:none}
+.rdot{width:13px;height:13px;border:1px solid #2e2228;border-radius:50%;flex-shrink:0;margin-top:4px;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.ro input:checked+.rdot{border-color:var(--gd);background:var(--gd)}
+.ro input:checked+.rdot::after{content:'';width:4px;height:4px;background:var(--dk);border-radius:50%}
+.rt{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--tm);line-height:1.5;transition:color .3s}
+.ro input:checked~.rt{color:var(--cr)}
+.commit{background:#0f0b0e;border:1px solid #2e2228;padding:2.2rem;margin:3rem 0}
+.commit-lbl{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gd);margin-bottom:1rem}
+.commit-t{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:var(--tm);line-height:1.75}
+.sub-wrap{text-align:center;margin-top:3rem}
+.btn-sub{background:var(--cr);color:var(--dk);font-family:'Lato',sans-serif;font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;padding:20px 58px;border:none;cursor:pointer;transition:all .3s}
+.btn-sub:hover{background:var(--gd)}
+.sub-note{font-size:11px;color:var(--tl);letter-spacing:.8px;margin-top:1rem;line-height:1.9}
+.success{display:none;text-align:center;padding:5rem 2rem}
+.success.show{display:block}
+.s-t{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:var(--cr);line-height:1.05;margin-bottom:1.5rem}
+.s-t em{font-style:italic;color:var(--gd)}
+.s-b{font-size:14px;color:var(--tm);max-width:480px;margin:0 auto;line-height:2}
+
+/* ── FOOTER ── */
+footer{padding:3.5rem 2rem;text-align:center;border-top:1px solid #1a1215}
+footer svg{height:18px;width:auto;margin-bottom:.6rem}
+.ft{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--tl)}
+
+/* ── REVEAL ── */
+.r{opacity:0;transform:translateY(22px);transition:opacity .85s,transform .85s}
+.r.v{opacity:1;transform:translateY(0)}
+.r2{transition-delay:.12s}.r3{transition-delay:.24s}
+
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes pulse-line{0%,100%{opacity:.3;transform:scaleY(.8)}50%{opacity:1;transform:scaleY(1.2)}}
+
+@media(max-width:640px){
+  .who-cols,.offer-g,.p-cards,.wk{grid-template-columns:1fr}
+  .wk-l{flex-direction:row;padding:1.2rem 1.5rem;border-right:none;border-bottom:1px solid rgba(196,168,130,.05)}
+  nav{padding:1rem 1.5rem}
+  .price-row{flex-direction:column;align-items:center}
+  .pp{min-width:260px}
+  .hero-btns{width:100%;padding:0 1rem}
+  .btn-main,.btn-paynow{width:100%;display:block;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg viewBox="0 0 757 196" xmlns="http://www.w3.org/2000/svg" fill="var(--cr)" style="fill-rule:evenodd;clip-rule:evenodd">
+      <g transform="matrix(1,0,0,1,-1006,-379.793)"><g transform="matrix(1,0,0,1,150.789,-1156.59)"><g transform="matrix(1.02954,0,0,1.02954,-81.2967,-954.023)"><circle cx="1624.33" cy="2588.42" r="20.337"/></g></g><g transform="matrix(0.752492,0,0,0.752492,704.259,324.521)"><g transform="matrix(1,0,0,1,-20.8877,-1165.32)"><path d="M421.873,1259.52C421.873,1254.08 423.667,1249.75 427.255,1246.53C430.843,1243.31 435.483,1241.7 441.174,1241.7C446.866,1241.7 451.443,1243.31 454.908,1246.53C458.372,1249.75 460.104,1254.08 460.104,1259.52C460.104,1264.72 458.372,1268.92 454.908,1272.14C451.443,1275.36 446.866,1276.96 441.174,1276.96C435.483,1276.96 430.843,1275.36 427.255,1272.14C423.667,1268.92 421.873,1264.72 421.873,1259.52ZM454.165,1295.73L454.165,1498.39L427.812,1498.39L427.812,1295.73L454.165,1295.73Z" fill-rule="nonzero"/></g><g transform="matrix(1,0,0,1,-20.8877,-1165.39)"><path d="M586.674,1475.38L586.674,1498.39L562.548,1498.39C542.999,1498.39 528.4,1493.75 518.749,1484.47C509.099,1475.19 504.274,1459.54 504.274,1437.52L504.274,1318.37L473.466,1318.37L473.466,1295.73L504.274,1295.73L504.274,1244.51L530.627,1244.51L530.627,1295.73L600.921,1295.73L586.303,1318.37L530.627,1318.37L530.627,1437.89C530.627,1452.24 533.225,1462.08 538.422,1467.4C543.618,1472.72 552.774,1475.38 565.888,1475.38L586.674,1475.38Z" fill-rule="nonzero"/></g><g transform="matrix(0.945019,0,0,1,6.25415,-1167.86)"><path d="M674.642,1293.13C696.665,1293.13 714.358,1298.95 727.72,1310.58C741.082,1322.21 749.248,1337.92 752.217,1357.71L727.349,1357.71C725.864,1344.6 720.482,1333.77 711.203,1325.24C701.923,1316.7 689.489,1312.43 673.9,1312.43C660.538,1312.43 650.083,1315.71 642.536,1322.27C634.988,1328.83 631.215,1337.55 631.215,1348.43C631.215,1356.6 633.628,1363.16 638.453,1368.11C643.278,1373.06 649.279,1376.83 656.455,1379.43C663.631,1382.03 673.281,1384.69 685.406,1387.41C700.253,1390.87 712.192,1394.4 721.224,1397.99C730.256,1401.58 737.989,1407.2 744.423,1414.88C750.856,1422.55 754.073,1432.94 754.073,1446.05C754.073,1462.14 748.073,1475.32 736.071,1485.58C724.07,1495.85 708.171,1500.99 688.376,1500.99C665.115,1500.99 646.062,1495.23 631.215,1483.73C616.368,1472.22 607.584,1456.45 604.862,1436.4L630.101,1436.4C631.586,1449.77 637.401,1460.65 647.547,1469.07C657.692,1477.48 671.425,1481.69 688.747,1481.69C701.614,1481.69 711.636,1478.35 718.812,1471.66C725.988,1464.98 729.576,1456.32 729.576,1445.68C729.576,1437.02 727.101,1430.09 722.152,1424.9C717.203,1419.7 711.079,1415.8 703.779,1413.2C696.479,1410.61 686.52,1407.82 673.9,1404.85C659.3,1401.39 647.608,1397.92 638.824,1394.46C630.04,1391 622.554,1385.61 616.368,1378.32C610.182,1371.02 607.089,1361.06 607.089,1348.43C607.089,1331.86 613.151,1318.49 625.276,1308.35C637.401,1298.2 653.856,1293.13 674.642,1293.13Z" fill-rule="nonzero"/></g></g><g transform="matrix(0.752492,0,0,0.752492,989.798,324.521)"><g transform="matrix(1,0,0,1,-48.795,-1165.12)"><path d="M415.192,1498.39C419.605,1496.07 424.033,1493.73 428.183,1490.97C430.556,1489.38 433.251,1487.87 434.679,1485.4C437.901,1479.83 437.463,1466.39 437.463,1461.27L437.463,1275.68C437.463,1270.63 437.949,1257.14 434.679,1251.56C433.238,1249.1 430.556,1247.57 428.183,1245.99C424.033,1243.23 419.605,1240.89 415.192,1238.57L520.977,1238.57C520.977,1238.57 509.153,1244.17 504.181,1248.31C497.226,1254.11 498.706,1268.32 498.706,1275.68L498.706,1364.77L578.508,1364.77L578.508,1275.68C578.508,1270.63 578.994,1257.14 575.725,1251.56C574.284,1249.1 571.602,1247.57 569.229,1245.99C565.079,1243.23 560.651,1240.89 556.238,1238.57L662.022,1238.57C662.022,1238.57 650.199,1244.17 645.227,1248.31C638.272,1254.11 639.752,1268.32 639.752,1275.68L639.752,1461.27C639.752,1468.66 638.292,1482.87 645.227,1488.65C650.199,1492.79 662.022,1498.39 662.022,1498.39L556.238,1498.39C560.651,1496.07 565.079,1493.73 569.229,1490.97C571.602,1489.38 574.297,1487.87 575.725,1485.4C578.947,1479.83 578.508,1466.39 578.508,1461.27L578.508,1374.05L498.706,1374.05L498.706,1461.27C498.706,1468.66 497.246,1482.87 504.181,1488.65C509.153,1492.79 520.977,1498.39 520.977,1498.39L415.192,1498.39Z" fill-rule="nonzero"/></g><g transform="matrix(1,0,0,1,-48.795,-1170.82)"><path d="M734.401,1414.88C734.737,1437.02 730.992,1486.69 763.352,1492.08C766.535,1492.61 769.779,1492.94 773.003,1492.82C779.569,1492.57 786.169,1492.17 792.629,1490.97C799.519,1489.68 806.345,1487.87 812.904,1485.4C826.684,1480.21 837.899,1473.58 848.351,1463.13C848.351,1489.25 813.009,1500.64 792.629,1503.03C786.983,1503.69 781.284,1504.09 775.601,1503.96C767.738,1503.78 759.836,1503.4 752.078,1502.1C732.125,1498.76 712.845,1490.15 698.397,1475.75C670.194,1447.64 664.194,1399.47 677.983,1363.1C696.493,1314.27 751.675,1302.09 798.243,1310.02C815.185,1312.9 834.331,1321.7 844.825,1335.82C847.446,1339.34 849.726,1343.24 851.089,1347.41C852.552,1351.9 853.074,1356.7 853.176,1361.43C853.969,1398.07 810.564,1408.62 782.468,1412.46C767.625,1414.49 749.497,1414.88 734.401,1414.88ZM734.401,1405.6C747.182,1404.74 762.854,1403.86 774.302,1396.69C792.072,1385.56 794.397,1362.52 790.448,1343.61C789.005,1336.7 786.749,1329.95 782.236,1324.5C775.208,1316 762.923,1313.63 753.888,1320.78C749.082,1324.59 746.133,1329.86 743.866,1335.44C740.507,1343.72 738.243,1354.24 736.999,1362.91C734.941,1377.26 734.401,1391.07 734.401,1405.6Z" fill-rule="nonzero"/></g><g transform="matrix(1,0,0,1,-48.795,-1165.1)"><path d="M885.468,1335.44C882.252,1335.44 878.664,1336.62 874.704,1338.97C870.745,1341.32 866.786,1344.48 862.827,1348.43C862.827,1343.73 864.126,1339.16 866.724,1334.7C869.322,1330.25 872.787,1326.23 877.117,1322.64C881.447,1319.05 886.52,1316.2 892.335,1314.1C898.15,1312 904.275,1310.95 910.708,1310.95C919.616,1310.95 928.091,1313.17 936.134,1317.63C944.176,1322.08 949.558,1328.64 952.28,1337.3C958.713,1329.13 966.384,1322.76 975.292,1318.18C984.2,1313.61 993.603,1311.32 1003.5,1311.32C1009.69,1311.32 1015.44,1312.25 1020.76,1314.1C1026.08,1315.96 1030.72,1318.49 1034.68,1321.71C1038.64,1324.93 1041.73,1328.7 1043.96,1333.03C1046.19,1337.36 1047.3,1342 1047.3,1346.95C1047.3,1355.12 1044.45,1361.92 1038.76,1367.37C1033.07,1372.81 1025.9,1375.53 1017.24,1375.53C1012.29,1375.53 1008.14,1374.6 1004.8,1372.75C1001.46,1370.89 998.738,1368.54 996.635,1365.69C994.531,1362.85 993.047,1359.57 992.181,1355.86C991.315,1352.15 990.882,1348.43 990.882,1344.72C990.882,1339.78 991.5,1335.01 992.737,1330.43C993.975,1325.86 995.336,1322.58 996.82,1320.6C993.356,1320.6 989.582,1321.59 985.5,1323.57C981.417,1325.55 977.334,1328.14 973.251,1331.36C969.168,1334.58 965.394,1338.1 961.93,1341.94C958.466,1345.78 955.744,1349.55 953.764,1353.26L953.764,1461.27C953.764,1466.72 953.888,1471.48 954.135,1475.56C954.383,1479.64 955.187,1482.92 956.548,1485.4C957.909,1487.87 960.136,1489.73 963.229,1490.97C966.322,1492.2 976.035,1498.39 976.035,1498.39L872.106,1498.39C872.106,1498.39 882.128,1492.2 885.097,1490.97C888.067,1489.73 890.232,1487.87 891.593,1485.4C892.954,1482.92 893.758,1479.64 894.005,1475.56C894.253,1471.48 894.377,1466.72 894.377,1461.27L894.377,1348.06C894.377,1343.36 893.51,1340.08 891.778,1338.23C890.046,1336.37 887.943,1335.44 885.468,1335.44Z" fill-rule="nonzero"/></g></g></g>
+    </svg>
+  </div>
+  <a href="#application" class="nav-apply">Apply Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pulse"><div class="pulse-dot"></div><span>Applications open now &nbsp;·&nbsp; Starts May 24th</span></div>
+  <div class="hero-mark">
+    <svg viewBox="0 0 433 433" xmlns="http://www.w3.org/2000/svg" fill="var(--cr)" style="fill-rule:evenodd;clip-rule:evenodd">
+      <g transform="matrix(1,0,0,1,-267.79,-261.267)"><g transform="matrix(1,0,0,1,-715.214,-767.927)"><g transform="matrix(1.13873,0,0,1.13873,-758.053,-1629.23)"><circle cx="1624.33" cy="2588.42" r="20.337"/></g></g><g transform="matrix(1,0,0,1,-715.214,-767.927)"><g transform="matrix(0.752492,0,0,0.752492,824.42,214.159)"><path d="M402.201,1255.6C402.201,1242.4 412.638,1231.09 423.544,1224.97C449.638,1210.34 493.139,1220.23 493.139,1255.23L493.139,1331.36C527.097,1286.31 613.77,1309.38 613.77,1368.48L613.77,1461.27C613.77,1463.36 613.944,1465.47 614.466,1467.49C618.959,1484.86 638.773,1469.3 645.319,1462.76C645.319,1475.79 635.081,1487.21 624.348,1493.38C597.547,1508.79 554.382,1496.51 554.382,1461.27L554.382,1368.48C554.382,1352.67 552.3,1344.89 545.103,1331.73C539.236,1321.01 525.091,1317.7 514.481,1323.01C504.381,1328.06 496.801,1340.04 493.139,1350.29L493.139,1461.27C493.139,1468.66 491.678,1482.87 498.613,1488.65C503.586,1492.79 515.409,1498.39 515.409,1498.39L411.48,1498.39C415.893,1496.07 420.322,1493.73 424.472,1490.97C426.844,1489.38 429.539,1487.87 430.967,1485.4C434.19,1479.83 433.751,1466.39 433.751,1461.27L433.751,1255.23C433.751,1253.22 433.614,1251.18 433.101,1249.24C428.706,1232.6 406.603,1251.19 402.201,1255.6Z" fill-rule="nonzero"/></g></g><g transform="matrix(1,0,0,1,-715.214,-767.927)"><g transform="matrix(0.957352,0,0,0.957352,27.4899,-782.197)"><path d="M1224.05,1892.08C1348.77,1892.08 1450.03,1993.34 1450.03,2118.06C1450.03,2242.78 1348.77,2344.03 1224.05,2344.03C1099.33,2344.03 998.079,2242.78 998.079,2118.06C998.079,1993.34 1099.33,1892.08 1224.05,1892.08ZM1224.05,1905.14C1106.54,1905.14 1011.14,2000.55 1011.14,2118.06C1011.14,2235.57 1106.54,2330.97 1224.05,2330.97C1341.56,2330.97 1436.97,2235.57 1436.97,2118.06C1436.97,2000.55 1341.56,1905.14 1224.05,1905.14Z"/></g></g></g>
+    </svg>
+  </div>
+  <h1 class="hero-h">The Narrow<br><em>Path</em></h1>
+  <div class="hero-vline"></div>
+  <p class="hero-sub">"8 weeks of intense, transformative mentorship. Not to feel better — to become different."</p>
+  <div class="hero-date">Cohort 1 &nbsp;·&nbsp; 24th May 2026</div>
+  <div class="price-row">
+    <div class="pp best">
+      <div class="pp-lbl">Pay in full</div>
+      <div class="pp-amt">$4,500</div>
+      <div class="pp-det">One payment · 8 weeks</div>
+      <div class="pp-save">Save $1,000</div>
+    </div>
+    <div class="pp">
+      <div class="pp-lbl">Payment plan</div>
+      <div class="pp-amt">$5,500</div>
+      <div class="pp-det">Two payments of $2,750</div>
+    </div>
+  </div>
+  <div class="hero-btns">
+    <a href="#application" class="btn-main">Apply for Your Place</a>
+    <a href="#book-now" class="btn-sec">Ready to commit? Book &amp; pay now →</a>
+  </div>
+  <p class="hero-caveat">By application only · She reviews every application personally</p>
+  <div class="scroll-cue"><div class="scroll-line"></div><span>Read first</span></div>
+</section>
+
+<!-- TRUTH BAND -->
+<div class="truth">
+  <p>This is not coaching.<br>This is not therapy.<br>This is not a course you buy and forget.<br><br><strong>This is 8 weeks with a woman who has been to the edge, seen what most people will never see, and came out the other side with sight.</strong><br><br>She will see things in you that you cannot see in yourself.<br>And she will not let you stay comfortable in them.</p>
+</div>
+
+
+
+<!-- MIRROR -->
+<section class="mirror">
+  <div class="mirror-in">
+    <div class="eyebrow r">Who she is</div>
+    <blockquote class="mirror-q r r2">"I am not a coach with a certificate and a programme.<br>I am a mirror."</blockquote>
+    <div class="mirror-body r r3">
+      <p>I will show you things in yourself that you cannot see yet — because I have been exactly where you are. I have walked through the kind of darkness most people do not survive. I came out the other side not with theory, but with sight.</p>
+      <p>I do not teach from books. I teach from a life that has been through fire. When you sit across from me I will see the version of you that exists on the other side of everything you are carrying — and I will not stop holding that vision until you can see it yourself.</p>
+      <p>This is not gentle. It is not comfortable. It is not for everyone. But for the person who is truly ready — it will be the most important 8 weeks of their life.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO FOR -->
+<section class="who">
+  <div class="who-in">
+    <div class="sec-lbl r">Read this before you apply</div>
+    <div class="who-cols r r2">
+      <div class="wc">
+        <div class="wc-head y">This is for you if</div>
+        <div class="wi y">You are done with the version of yourself you have been performing</div>
+        <div class="wi y">You know something has to fundamentally change — and you are finally ready</div>
+        <div class="wi y">You have been running from something and you know exactly what it is</div>
+        <div class="wi y">You are at rock bottom or rebuilding your life from scratch</div>
+        <div class="wi y">You want faith as foundation — not religion as performance</div>
+        <div class="wi y">You are ready to be challenged, confronted, and transformed</div>
+        <div class="wi y">You want results that last — not a feeling that fades in a week</div>
+        <div class="wi y">You can make a decision and honour it</div>
+      </div>
+      <div class="wc">
+        <div class="wc-head n">This is not for you if</div>
+        <div class="wi n">You want to be told you are fine the way you are</div>
+        <div class="wi n">You are looking for easy answers and soft encouragement</div>
+        <div class="wi n">You are not prepared to be honest — with her or with yourself</div>
+        <div class="wi n">You expect transformation without discomfort</div>
+        <div class="wi n">You are not willing to do the work between sessions</div>
+        <div class="wi n">You want somewhere safe to stay exactly where you are</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 WEEKS -->
+<section class="weeks">
+  <div class="weeks-hd r">
+    <div class="sec-lbl" style="text-align:center">The 8-week journey</div>
+    <h2 class="weeks-t">What happens on <em>The Narrow Path</em></h2>
+    <p class="weeks-s">Each week is a step. Each step requires truth. There is no skipping ahead.</p>
+  </div>
+  <div class="wk-list r r2">
+    <div class="wk"><div class="wk-l"><div class="wk-nl">Week</div><div class="wk-n">01</div></div><div class="wk-r"><div class="wk-t">The Wound — Face What You Have Been Running From</div><div class="wk-d">We start where it actually started — not where you think it did. We name the wound, look at it directly, and stop pretending it is not there. No one heals from something they will not acknowledge. This week will be uncomfortable. That is the point.</div><div class="wk-q">"The thing you keep circling is the thing we are walking straight toward."</div></div></div>
+    <div class="wk"><div class="wk-l"><div class="wk-nl">Week</div><div class="wk-n">02</div></div><div class="wk-r"><div class="wk-t">The Old Identity — Who You Agreed to Be</div><div class="wk-d">Every pattern in your life was built by an identity you agreed to — consciously or not. We excavate it completely. The labels, the lies, the version of you that was shaped by what happened to you instead of who you actually are.</div><div class="wk-q">"You cannot build a new life on an identity that was never truly yours."</div></div></div>
+    <div class="wk"><div class="wk-l"><div class="wk-nl">Week</div><div class="wk-n">03</div></div><div class="wk-r"><div class="wk-t">The Chains — What Is Actually Holding You</div><div class="wk-d">Soul ties. Strongholds. Cycles that repeat no matter how many times you try to break them. We identify what has ground in your life and exactly how it got there. This is the week people understand why nothing has worked before.</div><div class="wk-q">"You cannot break free from something you have not yet named."</div></div></div>
+    <div class="wk wk-sp"><div class="wk-l"><div class="wk-nl">Week</div><div class="wk-n">04</div></div><div class="wk-r"><div class="wk-t">First 1:1 Session — Your Private Breakthrough</div><div class="wk-d">Your first private session with her. Just you. No group, no audience. Everything you have uncovered in the first three weeks brought into one conversation. She will see what the group sessions cannot reach.</div><div class="wk-q">"Some things only break in private."</div></div></div>
+    <div class="wk"><div class="wk-l"><div class="wk-nl">Week</div><div class="wk-n">05</div></div><div class="wk-r"><div class="wk-t">The Wilderness — Why the Gap Exists</div><div class="wk-d">The gap between where you are and where you know you should be has a reason. We map it — not to mourn it, but to extract what it is trying to teach you before it releases you. The wilderness is not punishment. It is preparation.</div><div class="wk-q">"The wilderness ends when the lesson finally lands."</div></div></div>
+    <div class="wk"><div class="wk-l"><div class="wk-nl">Week</div><div class="wk-n">06</div></div><div class="wk-r"><div class="wk-t">The True Identity — Who You Actually Are</div><div class="wk-d">This is where we build — not rebuild. Who you actually are was never the damaged version. We go back to the original design: who you were created to be before the world got to work on you. This is the foundation everything from here will stand on.</div><div class="wk-q">"You are not your story. You are what existed before the story began."</div></div></div>
+    <div class="wk"><div class="wk-l"><div class="wk-nl">Week</div><div class="wk-n">07</div></div><div class="wk-r"><div class="wk-t">The Purpose — Why You Are Still Here</div><div class="wk-d">Not a general answer. A specific one. We look at your gifts, your scars, your whole story — and find the thread that connects everything you have been through to everything you are supposed to build. Your survival was not an accident. It was an assignment.</div><div class="wk-q">"Your survival was not luck. It was a mandate."</div></div></div>
+    <div class="wk wk-sp"><div class="wk-l"><div class="wk-nl">Week</div><div class="wk-n">08</div></div><div class="wk-r"><div class="wk-t">Second 1:1 + The Path Forward</div><div class="wk-d">Your final private session. We close the 8 weeks, mark what has changed, and map exactly what you are walking into. You leave with one clear, specific next step — not a feeling, not a vague direction. A concrete move you can make this week.</div><div class="wk-q">"This is not the end. This is the first step on the right road."</div></div></div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="offer">
+  <div style="max-width:900px;margin:0 auto;padding:0 2rem">
+    <h2 class="offer-t r">Everything included</h2>
+    <p class="offer-s r">No hidden extras. No upsells. This is the complete investment.</p>
+    <div class="offer-g r r2">
+      <div class="oi"><div class="o-mk"></div><div class="o-t">8 Weekly Group Sessions</div><div class="o-b">Live. Recorded. Led by her directly. 90 minutes of real work each week — no scripts, no filler. Recordings are yours to keep. Each session builds on the last.</div></div>
+      <div class="oi"><div class="o-mk"></div><div class="o-t">2 Private 1:1 Sessions</div><div class="o-b">At Week 4 and Week 8. Yours alone. No group, no audience — just you and everything that cannot be said in a room full of people. She brings her full discernment to your specific life.</div></div>
+      <div class="oi"><div class="o-mk"></div><div class="o-t">Self-Paced Modules</div><div class="o-b">Structured content, reflection exercises, and weekly assignments between sessions. Transformation does not only happen on the call — it happens in the work you do in the days between.</div></div>
+      <div class="oi"><div class="o-mk"></div><div class="o-t">Faith as Foundation</div><div class="o-b">Not a church programme. Not religious performance. Ancient wisdom that has guided people home for thousands of years — applied to your real, actual life right now.</div></div>
+      <div class="oi"><div class="o-mk"></div><div class="o-t">Kingdom Business Direction</div><div class="o-b">What did you survive to build? We spend time on the practical — your calling, your gifts, how to build something that generates income and serves the exact purpose you were created for.</div></div>
+      <div class="oi"><div class="o-mk"></div><div class="o-t">The Cohort</div><div class="o-b">The people who go through this with you become your witnesses. You will see each other transform. That is not incidental — it is part of the process.</div></div>
+    </div>
+    <div class="offer-ft r r3"><p class="of-q">"I will not carry you. I will walk with you. But only if you are ready to walk."</p><div class="of-d">Starts May 24th<br>Application required<br>Places are limited</div></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pay-now">
+  <div style="max-width:800px;margin:0 auto;padding:0 2rem">
+    <h2 class="pricing-t r">Your investment</h2>
+    <div class="p-cards r r2">
+      <div class="pc feat">
+        <div class="pc-lbl">Pay in full</div>
+        <div class="pc-badge">Save $1,000</div>
+        <div class="pc-amt">$4,500</div>
+        <div class="pc-per">One single payment</div>
+        <ul class="pc-list">
+          <li>8 live group sessions</li>
+          <li>2 private 1:1 sessions</li>
+          <li>Self-paced modules</li>
+          <li>Kingdom business direction</li>
+          <li>Cohort community access</li>
+          <li>All recordings yours to keep</li>
+        </ul>
+        <a href="#application" class="btn-pc">Apply — Pay in Full</a>
+      </div>
+      <div class="pc">
+        <div class="pc-lbl">Payment plan</div>
+        <div class="pc-amt">$5,500</div>
+        <div class="pc-per">Two payments of $2,750</div>
+        <ul class="pc-list">
+          <li>8 live group sessions</li>
+          <li>2 private 1:1 sessions</li>
+          <li>Self-paced modules</li>
+          <li>Kingdom business direction</li>
+          <li>Cohort community access</li>
+          <li>All recordings yours to keep</li>
+        </ul>
+        <a href="#application" class="btn-pc">Apply — Payment Plan</a>
+      </div>
+    </div>
+
+    <p class="pricing-note r r3">Applications are reviewed personally. Once accepted your payment link will be sent directly to you.</p>
+  </div>
+</section>
+
+<!-- BOOK AND PAY -->
+<section style="padding:5rem 2rem;background:#0f0b0e;border-top:1px solid rgba(196,168,130,.12);border-bottom:1px solid rgba(196,168,130,.12)" id="book-now">
+  <div style="max-width:820px;margin:0 auto;text-align:center">
+    <p style="font-size:9px;letter-spacing:5px;text-transform:uppercase;color:#c4a882;margin-bottom:1.5rem" class="r">Ready to commit without applying?</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,58px);font-weight:300;color:#fff1e3;line-height:1.05;margin-bottom:1rem" class="r">Book &amp; Pay Now</h2>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:#c4a882;max-width:580px;margin:0 auto 3rem;line-height:1.7" class="r">"If you have read this page and you already know — you know. Book your place directly. No application needed. Pay now and you are in. You will receive a welcome email within 24 hours."</p>
+
+    <!-- Two pay options side by side -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(196,168,130,.1);max-width:680px;margin:0 auto 2rem" class="r">
+      <!-- Pay in full -->
+      <div style="background:#2e2228;padding:2.5rem 2rem;text-align:center">
+        <p style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#c4a882;margin-bottom:.5rem">Pay in full</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:#c4a882;line-height:1;margin-bottom:.3rem">$4,500</p>
+        <p style="font-size:10px;color:#7a6858;letter-spacing:1px;margin-bottom:.6rem">One payment · Save $1,000</p>
+        <p style="font-size:12px;color:#c4a882;margin-bottom:1.8rem;line-height:1.7">Every session, every module,<br>your place locked in immediately.</p>
+        <a href="YOUR_PAY_IN_FULL_LINK" style="display:block;background:#fff1e3;color:#4d3e43;font-family:'Lato',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:15px 0;text-decoration:none;transition:background .3s" onmouseover="this.style.background='#c4a882'" onmouseout="this.style.background='#fff1e3'">Book Now — $4,500</a>
+      </div>
+      <!-- Payment plan -->
+      <div style="background:#1a1215;padding:2.5rem 2rem;text-align:center">
+        <p style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#7a6858;margin-bottom:.5rem">Payment plan</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:#fff1e3;line-height:1;margin-bottom:.3rem">$5,500</p>
+        <p style="font-size:10px;color:#7a6858;letter-spacing:1px;margin-bottom:.6rem">Two payments of $2,750</p>
+        <p style="font-size:12px;color:#7a6858;margin-bottom:1.8rem;line-height:1.7">First payment now secures your place.<br>Second due at Week 4.</p>
+        <a href="YOUR_FIRST_INSTALMENT_LINK" style="display:block;background:transparent;color:#fff1e3;font-family:'Lato',sans-serif;font-size:10px;font-weight:400;letter-spacing:3px;text-transform:uppercase;padding:15px 0;border:1px solid rgba(255,241,227,.15);text-decoration:none;transition:all .3s" onmouseover="this.style.borderColor='#c4a882';this.style.color='#c4a882'" onmouseout="this.style.borderColor='rgba(255,241,227,.15)';this.style.color='#fff1e3'">Book Now — $2,750 Today</a>
+      </div>
+    </div>
+
+    <p style="font-size:11px;color:#7a6858;letter-spacing:.8px;line-height:1.9;max-width:480px;margin:0 auto" class="r">
+      Payment goes directly to itsHER via PayPal or Wise.<br>
+      Once payment is confirmed your Skool access is sent within 24 hours.<br>
+      Start date: <strong style="color:#c4a882">24th May 2026</strong>
+    </p>
+
+    <div style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(196,168,130,.1)" class="r">
+      <p style="font-size:12px;color:#7a6858">Prefer to apply first? <a href="#application" style="color:#c4a882;text-decoration:none;border-bottom:1px solid rgba(196,168,130,.3)">Submit an application below →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATION -->
+<section class="app" id="application">
+  <div style="max-width:680px;margin:0 auto;padding:0 2rem">
+    <h2 class="app-t r">Ready to walk<br><em>The Narrow Path?</em></h2>
+    <p class="app-s r">Every application is read personally by her. Be honest — it is the only thing she asks. You will hear back within 48 hours.</p>
+
+    <div id="formWrap">
+      <form id="appForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="4542836a-8df7-4314-8415-a4316db8b29f">
+        <input type="hidden" name="subject" value="New Narrow Path Application — itsHER">
+        <input type="hidden" name="from_name" value="itsHER Narrow Path">
+        <input type="hidden" name="replyto" value="email">
+
+        <div class="fsec">About you</div>
+        <div class="field"><label>Full name<span class="req">*</span></label><input type="text" name="name" placeholder="Your full name" required></div>
+        <div class="field"><label>Email address<span class="req">*</span></label><input type="email" name="email" placeholder="your@email.com" required></div>
+        <div class="field"><label>Country</label><input type="text" name="country" placeholder="Where in the world are you?"></div>
+        <div class="field"><label>How did you find itsHER?</label>
+          <select name="source"><option value="" disabled selected>Select one</option><option>Instagram</option><option>TikTok</option><option>Podcast</option><option>Referred by someone</option><option>Skool community</option><option>Other</option></select>
+        </div>
+
+        <div class="fsec">Your story</div>
+        <div class="field"><label>Where are you right now?<span class="req">*</span></label><textarea name="where" placeholder="Not the polished answer. Where are you actually?" required></textarea></div>
+        <div class="field"><label>What have you been running from?</label><textarea name="running" placeholder="You already know what it is. Write it here."></textarea></div>
+        <div class="field"><label>How long have you been in this pattern or season?</label><input type="text" name="howlong" placeholder="Months, years, or as long as you can remember?"></div>
+        <div class="field"><label>What does your relationship with God or faith look like right now?</label><textarea name="faith" placeholder="Where you are now, what you believe or are wrestling with..."></textarea></div>
+
+        <div class="fsec">Your readiness</div>
+        <div class="field"><label>Why now?<span class="req">*</span></label><textarea name="whynow" placeholder="Something shifted. What was it?" required></textarea></div>
+        <div class="field"><label>What specific result would prove this 8 weeks changed your life?<span class="req">*</span></label><textarea name="result" placeholder="Not a feeling — a specific, real result." required></textarea></div>
+        <div class="field"><label>What are you most afraid of facing?</label><textarea name="afraid" placeholder="The thing that makes you hesitate even as you fill this in..."></textarea></div>
+        <div class="field"><label>What does life look like in 12 months if nothing changes?</label><textarea name="future" placeholder="Don't soften it."></textarea></div>
+        <div class="field"><label>Payment preference<span class="req">*</span></label>
+          <div class="rg">
+            <label class="ro"><input type="radio" name="payment" value="Pay in full — $4,500" required><div class="rdot"></div><span class="rt">Pay in full — $4,500 (saving $1,000)</span></label>
+            <label class="ro"><input type="radio" name="payment" value="Payment plan — $2,750 x 2"><div class="rdot"></div><span class="rt">Payment plan — two payments of $2,750</span></label>
+          </div>
+        </div>
+        <div class="field"><label>Anything else you want her to know?</label><textarea name="other" placeholder="This is your space."></textarea></div>
+
+
+          <div class="commit-lbl">Before you submit</div>
+          <p class="commit-t">"I am not here to make you feel better. I am here to help you become different. I will not carry you. I will walk with you. But only if you are ready to walk. I read every word personally."</p>
+        </div>
+
+        <div class="sub-wrap">
+          <button type="submit" class="btn-sub">Submit My Application</button>
+          <p class="sub-note">Personal response within 48 hours.<br>Once accepted your payment link is sent directly to your email.</p>
+        </div>
+      </form>
+
+      <div class="success" id="successMsg">
+        <div class="s-t">Application<br><em>received.</em></div>
+        <p class="s-b">Thank you for your honesty. Every word has been received.<br><br>You will hear back personally within 48 hours.<br><br>— itsHER</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <svg viewBox="0 0 757 196" xmlns="http://www.w3.org/2000/svg" fill="var(--gd)" style="fill-rule:evenodd;clip-rule:evenodd;display:block;margin:0 auto">
+    <g transform="matrix(1,0,0,1,-1006,-379.793)"><g transform="matrix(1,0,0,1,150.789,-1156.59)"><g transform="matrix(1.02954,0,0,1.02954,-81.2967,-954.023)"><circle cx="1624.33" cy="2588.42" r="20.337"/></g></g><g transform="matrix(0.752492,0,0,0.752492,704.259,324.521)"><g transform="matrix(1,0,0,1,-20.8877,-1165.32)"><path d="M421.873,1259.52C421.873,1254.08 423.667,1249.75 427.255,1246.53C430.843,1243.31 435.483,1241.7 441.174,1241.7C446.866,1241.7 451.443,1243.31 454.908,1246.53C458.372,1249.75 460.104,1254.08 460.104,1259.52C460.104,1264.72 458.372,1268.92 454.908,1272.14C451.443,1275.36 446.866,1276.96 441.174,1276.96C435.483,1276.96 430.843,1275.36 427.255,1272.14C423.667,1268.92 421.873,1264.72 421.873,1259.52ZM454.165,1295.73L454.165,1498.39L427.812,1498.39L427.812,1295.73L454.165,1295.73Z" fill-rule="nonzero"/></g><g transform="matrix(1,0,0,1,-20.8877,-1165.39)"><path d="M586.674,1475.38L586.674,1498.39L562.548,1498.39C542.999,1498.39 528.4,1493.75 518.749,1484.47C509.099,1475.19 504.274,1459.54 504.274,1437.52L504.274,1318.37L473.466,1318.37L473.466,1295.73L504.274,1295.73L504.274,1244.51L530.627,1244.51L530.627,1295.73L600.921,1295.73L586.303,1318.37L530.627,1318.37L530.627,1437.89C530.627,1452.24 533.225,1462.08 538.422,1467.4C543.618,1472.72 552.774,1475.38 565.888,1475.38L586.674,1475.38Z" fill-rule="nonzero"/></g><g transform="matrix(0.945019,0,0,1,6.25415,-1167.86)"><path d="M674.642,1293.13C696.665,1293.13 714.358,1298.95 727.72,1310.58C741.082,1322.21 749.248,1337.92 752.217,1357.71L727.349,1357.71C725.864,1344.6 720.482,1333.77 711.203,1325.24C701.923,1316.7 689.489,1312.43 673.9,1312.43C660.538,1312.43 650.083,1315.71 642.536,1322.27C634.988,1328.83 631.215,1337.55 631.215,1348.43C631.215,1356.6 633.628,1363.16 638.453,1368.11C643.278,1373.06 649.279,1376.83 656.455,1379.43C663.631,1382.03 673.281,1384.69 685.406,1387.41C700.253,1390.87 712.192,1394.4 721.224,1397.99C730.256,1401.58 737.989,1407.2 744.423,1414.88C750.856,1422.55 754.073,1432.94 754.073,1446.05C754.073,1462.14 748.073,1475.32 736.071,1485.58C724.07,1495.85 708.171,1500.99 688.376,1500.99C665.115,1500.99 646.062,1495.23 631.215,1483.73C616.368,1472.22 607.584,1456.45 604.862,1436.4L630.101,1436.4C631.586,1449.77 637.401,1460.65 647.547,1469.07C657.692,1477.48 671.425,1481.69 688.747,1481.69C701.614,1481.69 711.636,1478.35 718.812,1471.66C725.988,1464.98 729.576,1456.32 729.576,1445.68C729.576,1437.02 727.101,1430.09 722.152,1424.9C717.203,1419.7 711.079,1415.8 703.779,1413.2C696.479,1410.61 686.52,1407.82 673.9,1404.85C659.3,1401.39 647.608,1397.92 638.824,1394.46C630.04,1391 622.554,1385.61 616.368,1378.32C610.182,1371.02 607.089,1361.06 607.089,1348.43C607.089,1331.86 613.151,1318.49 625.276,1308.35C637.401,1298.2 653.856,1293.13 674.642,1293.13Z" fill-rule="nonzero"/></g></g><g transform="matrix(0.752492,0,0,0.752492,989.798,324.521)"><g transform="matrix(1,0,0,1,-48.795,-1165.12)"><path d="M415.192,1498.39C419.605,1496.07 424.033,1493.73 428.183,1490.97C430.556,1489.38 433.251,1487.87 434.679,1485.4C437.901,1479.83 437.463,1466.39 437.463,1461.27L437.463,1275.68C437.463,1270.63 437.949,1257.14 434.679,1251.56C433.238,1249.1 430.556,1247.57 428.183,1245.99C424.033,1243.23 419.605,1240.89 415.192,1238.57L520.977,1238.57C520.977,1238.57 509.153,1244.17 504.181,1248.31C497.226,1254.11 498.706,1268.32 498.706,1275.68L498.706,1364.77L578.508,1364.77L578.508,1275.68C578.508,1270.63 578.994,1257.14 575.725,1251.56C574.284,1249.1 571.602,1247.57 569.229,1245.99C565.079,1243.23 560.651,1240.89 556.238,1238.57L662.022,1238.57C662.022,1238.57 650.199,1244.17 645.227,1248.31C638.272,1254.11 639.752,1268.32 639.752,1275.68L639.752,1461.27C639.752,1468.66 638.292,1482.87 645.227,1488.65C650.199,1492.79 662.022,1498.39 662.022,1498.39L556.238,1498.39C560.651,1496.07 565.079,1493.73 569.229,1490.97C571.602,1489.38 574.297,1487.87 575.725,1485.4C578.947,1479.83 578.508,1466.39 578.508,1461.27L578.508,1374.05L498.706,1374.05L498.706,1461.27C498.706,1468.66 497.246,1482.87 504.181,1488.65C509.153,1492.79 520.977,1498.39 520.977,1498.39L415.192,1498.39Z" fill-rule="nonzero"/></g><g transform="matrix(1,0,0,1,-48.795,-1170.82)"><path d="M734.401,1414.88C734.737,1437.02 730.992,1486.69 763.352,1492.08C766.535,1492.61 769.779,1492.94 773.003,1492.82C779.569,1492.57 786.169,1492.17 792.629,1490.97C799.519,1489.68 806.345,1487.87 812.904,1485.4C826.684,1480.21 837.899,1473.58 848.351,1463.13C848.351,1489.25 813.009,1500.64 792.629,1503.03C786.983,1503.69 781.284,1504.09 775.601,1503.96C767.738,1503.78 759.836,1503.4 752.078,1502.1C732.125,1498.76 712.845,1490.15 698.397,1475.75C670.194,1447.64 664.194,1399.47 677.983,1363.1C696.493,1314.27 751.675,1302.09 798.243,1310.02C815.185,1312.9 834.331,1321.7 844.825,1335.82C847.446,1339.34 849.726,1343.24 851.089,1347.41C852.552,1351.9 853.074,1356.7 853.176,1361.43C853.969,1398.07 810.564,1408.62 782.468,1412.46C767.625,1414.49 749.497,1414.88 734.401,1414.88ZM734.401,1405.6C747.182,1404.74 762.854,1403.86 774.302,1396.69C792.072,1385.56 794.397,1362.52 790.448,1343.61C789.005,1336.7 786.749,1329.95 782.236,1324.5C775.208,1316 762.923,1313.63 753.888,1320.78C749.082,1324.59 746.133,1329.86 743.866,1335.44C740.507,1343.72 738.243,1354.24 736.999,1362.91C734.941,1377.26 734.401,1391.07 734.401,1405.6Z" fill-rule="nonzero"/></g><g transform="matrix(1,0,0,1,-48.795,-1165.1)"><path d="M885.468,1335.44C882.252,1335.44 878.664,1336.62 874.704,1338.97C870.745,1341.32 866.786,1344.48 862.827,1348.43C862.827,1343.73 864.126,1339.16 866.724,1334.7C869.322,1330.25 872.787,1326.23 877.117,1322.64C881.447,1319.05 886.52,1316.2 892.335,1314.1C898.15,1312 904.275,1310.95 910.708,1310.95C919.616,1310.95 928.091,1313.17 936.134,1317.63C944.176,1322.08 949.558,1328.64 952.28,1337.3C958.713,1329.13 966.384,1322.76 975.292,1318.18C984.2,1313.61 993.603,1311.32 1003.5,1311.32C1009.69,1311.32 1015.44,1312.25 1020.76,1314.1C1026.08,1315.96 1030.72,1318.49 1034.68,1321.71C1038.64,1324.93 1041.73,1328.7 1043.96,1333.03C1046.19,1337.36 1047.3,1342 1047.3,1346.95C1047.3,1355.12 1044.45,1361.92 1038.76,1367.37C1033.07,1372.81 1025.9,1375.53 1017.24,1375.53C1012.29,1375.53 1008.14,1374.6 1004.8,1372.75C1001.46,1370.89 998.738,1368.54 996.635,1365.69C994.531,1362.85 993.047,1359.57 992.181,1355.86C991.315,1352.15 990.882,1348.43 990.882,1344.72C990.882,1339.78 991.5,1335.01 992.737,1330.43C993.975,1325.86 995.336,1322.58 996.82,1320.6C993.356,1320.6 989.582,1321.59 985.5,1323.57C981.417,1325.55 977.334,1328.14 973.251,1331.36C969.168,1334.58 965.394,1338.1 961.93,1341.94C958.466,1345.78 955.744,1349.55 953.764,1353.26L953.764,1461.27C953.764,1466.72 953.888,1471.48 954.135,1475.56C954.383,1479.64 955.187,1482.92 956.548,1485.4C957.909,1487.87 960.136,1489.73 963.229,1490.97C966.322,1492.2 976.035,1498.39 976.035,1498.39L872.106,1498.39C872.106,1498.39 882.128,1492.2 885.097,1490.97C888.067,1489.73 890.232,1487.87 891.593,1485.4C892.954,1482.92 893.758,1479.64 894.005,1475.56C894.253,1471.48 894.377,1466.72 894.377,1461.27L894.377,1348.06C894.377,1343.36 893.51,1340.08 891.778,1338.23C890.046,1336.37 887.943,1335.44 885.468,1335.44Z" fill-rule="nonzero"/></g></g></g>
+  </svg>
+  <div class="ft">There's still hope &nbsp;·&nbsp; The Narrow Path &nbsp;·&nbsp; © itsHER</div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')}),{threshold:.07});
+document.querySelectorAll('.r').forEach(e=>obs.observe(e));
+document.getElementById('appForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const btn=this.querySelector('.btn-sub');
+  btn.textContent='Sending...';
+  btn.disabled=true;
+  const data=new FormData(this);
+  const response=await fetch('https://api.web3forms.com/submit',{method:'POST',body:data});
+  const result=await response.json();
+  if(result.success){
+    this.style.display='none';
+    document.getElementById('successMsg').classList.add('show');
+    document.getElementById('application').scrollIntoView({behavior:'smooth'});
+  } else {
+    btn.textContent='Submit My Application';
+    btn.disabled=false;
+    alert('Something went wrong. Please try again.');
+  }
+});
+</script>
+</body>
+</html>
